@@ -5,7 +5,7 @@ import Todo from './componentes/todo';
 
 
 function App() {
-  const [todos, setTdos] = useState(
+  const [todos, setTodos] = useState(
   [{
     id: 1,
     text: 'Estudar react',
@@ -24,17 +24,30 @@ function App() {
     category: 'estudos',
     isCompleted: false
   }
-  ])
+  ]);
+
+  const AddTodo = (text, category) => {
+
+    const newTodo = [...todos,{
+      id: Math.floor(Math.random()*10000),
+      text,
+      category,
+      isCompleted: false
+    }]
+    setTodos(newTodo)
+  }
+
+  
 
   return (
     <div className='app'>
       <h1>Lista de tarefas</h1>
       <div className='todo-list'>
         {todos.map((todo) => (
-          <Todo todo={todo} />
+          <Todo key={todos.id} todo={todo} />
         ))}
       </div>
-      <TodoForm />
+      <TodoForm AddTodo={AddTodo} />
     </div>
   )
 }
